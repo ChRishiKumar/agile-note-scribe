@@ -1,5 +1,5 @@
-
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -12,6 +12,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
     email: '',
@@ -36,7 +37,8 @@ const Login = () => {
         description: "Welcome back to your notes!",
       });
       setIsLoading(false);
-      // Redirect to main app would happen here
+      // Navigate to home page
+      navigate('/');
     }, 1000);
   };
 
@@ -58,9 +60,11 @@ const Login = () => {
     setTimeout(() => {
       toast({
         title: "Account Created",
-        description: "Welcome! Please check your email to verify your account.",
+        description: "Welcome! Redirecting to your notes...",
       });
       setIsLoading(false);
+      // Navigate to home page after signup
+      navigate('/');
     }, 1000);
   };
 
